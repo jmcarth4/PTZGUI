@@ -42,10 +42,13 @@ Partial Class PTZGUI
         Me.YLabel = New System.Windows.Forms.Label()
         Me.XLabel = New System.Windows.Forms.Label()
         Me.LEDGroupBox = New System.Windows.Forms.GroupBox()
+        Me.BlueDisplayLabel = New System.Windows.Forms.Label()
+        Me.GreenDisplayLabel = New System.Windows.Forms.Label()
+        Me.RedDisplayLabel = New System.Windows.Forms.Label()
+        Me.BlueTrackBar = New System.Windows.Forms.TrackBar()
+        Me.GreenTrackBar = New System.Windows.Forms.TrackBar()
+        Me.RedTrackBar = New System.Windows.Forms.TrackBar()
         Me.HexDisplayLabel = New System.Windows.Forms.Label()
-        Me.HEXLabel = New System.Windows.Forms.Label()
-        Me.IndicatorTextBox = New System.Windows.Forms.TextBox()
-        Me.LEDTextBox = New System.Windows.Forms.TextBox()
         Me.ClearColorButton = New System.Windows.Forms.Button()
         Me.SetColorButton = New System.Windows.Forms.Button()
         Me.BlueTextBox = New System.Windows.Forms.TextBox()
@@ -57,18 +60,16 @@ Partial Class PTZGUI
         Me.RedLabel = New System.Windows.Forms.Label()
         Me.ExtiButton = New System.Windows.Forms.Button()
         Me.SerialPort1 = New System.IO.Ports.SerialPort(Me.components)
-        Me.RedTrackBar = New System.Windows.Forms.TrackBar()
-        Me.GreenTrackBar = New System.Windows.Forms.TrackBar()
-        Me.BlueTrackBar = New System.Windows.Forms.TrackBar()
-        Me.RedDisplayLabel = New System.Windows.Forms.Label()
-        Me.GreenDisplayLabel = New System.Windows.Forms.Label()
-        Me.BlueDisplayLabel = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.PortComboBox = New System.Windows.Forms.ComboBox()
+        Me.SerialPortLabel = New System.Windows.Forms.Label()
+        Me.RefreshButton = New System.Windows.Forms.Button()
         Me.CameraGroupBox.SuspendLayout()
         Me.LEDGroupBox.SuspendLayout()
-        CType(Me.LEDPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RedTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.GreenTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BlueTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GreenTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.RedTrackBar, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.LEDPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CameraGroupBox
@@ -283,9 +284,6 @@ Partial Class PTZGUI
         Me.LEDGroupBox.Controls.Add(Me.GreenTrackBar)
         Me.LEDGroupBox.Controls.Add(Me.RedTrackBar)
         Me.LEDGroupBox.Controls.Add(Me.HexDisplayLabel)
-        Me.LEDGroupBox.Controls.Add(Me.HEXLabel)
-        Me.LEDGroupBox.Controls.Add(Me.IndicatorTextBox)
-        Me.LEDGroupBox.Controls.Add(Me.LEDTextBox)
         Me.LEDGroupBox.Controls.Add(Me.ClearColorButton)
         Me.LEDGroupBox.Controls.Add(Me.SetColorButton)
         Me.LEDGroupBox.Controls.Add(Me.BlueTextBox)
@@ -303,43 +301,78 @@ Partial Class PTZGUI
         Me.LEDGroupBox.TabStop = False
         Me.LEDGroupBox.Text = "LED Colour"
         '
+        'BlueDisplayLabel
+        '
+        Me.BlueDisplayLabel.AutoSize = True
+        Me.BlueDisplayLabel.BackColor = System.Drawing.Color.Black
+        Me.BlueDisplayLabel.ForeColor = System.Drawing.Color.White
+        Me.BlueDisplayLabel.Location = New System.Drawing.Point(150, 291)
+        Me.BlueDisplayLabel.Name = "BlueDisplayLabel"
+        Me.BlueDisplayLabel.Size = New System.Drawing.Size(20, 20)
+        Me.BlueDisplayLabel.TabIndex = 43
+        Me.BlueDisplayLabel.Text = "B"
+        '
+        'GreenDisplayLabel
+        '
+        Me.GreenDisplayLabel.AutoSize = True
+        Me.GreenDisplayLabel.BackColor = System.Drawing.Color.Black
+        Me.GreenDisplayLabel.ForeColor = System.Drawing.Color.White
+        Me.GreenDisplayLabel.Location = New System.Drawing.Point(148, 189)
+        Me.GreenDisplayLabel.Name = "GreenDisplayLabel"
+        Me.GreenDisplayLabel.Size = New System.Drawing.Size(22, 20)
+        Me.GreenDisplayLabel.TabIndex = 42
+        Me.GreenDisplayLabel.Text = "G"
+        '
+        'RedDisplayLabel
+        '
+        Me.RedDisplayLabel.AutoSize = True
+        Me.RedDisplayLabel.BackColor = System.Drawing.Color.Black
+        Me.RedDisplayLabel.ForeColor = System.Drawing.Color.White
+        Me.RedDisplayLabel.Location = New System.Drawing.Point(149, 90)
+        Me.RedDisplayLabel.Name = "RedDisplayLabel"
+        Me.RedDisplayLabel.Size = New System.Drawing.Size(21, 20)
+        Me.RedDisplayLabel.TabIndex = 41
+        Me.RedDisplayLabel.Text = "R"
+        '
+        'BlueTrackBar
+        '
+        Me.BlueTrackBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BlueTrackBar.Location = New System.Drawing.Point(189, 266)
+        Me.BlueTrackBar.Maximum = 255
+        Me.BlueTrackBar.Name = "BlueTrackBar"
+        Me.BlueTrackBar.Size = New System.Drawing.Size(195, 69)
+        Me.BlueTrackBar.TabIndex = 40
+        Me.BlueTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
+        '
+        'GreenTrackBar
+        '
+        Me.GreenTrackBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.GreenTrackBar.Location = New System.Drawing.Point(189, 169)
+        Me.GreenTrackBar.Maximum = 255
+        Me.GreenTrackBar.Name = "GreenTrackBar"
+        Me.GreenTrackBar.Size = New System.Drawing.Size(195, 69)
+        Me.GreenTrackBar.TabIndex = 39
+        Me.GreenTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
+        '
+        'RedTrackBar
+        '
+        Me.RedTrackBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.RedTrackBar.Location = New System.Drawing.Point(189, 70)
+        Me.RedTrackBar.Maximum = 255
+        Me.RedTrackBar.Name = "RedTrackBar"
+        Me.RedTrackBar.Size = New System.Drawing.Size(195, 69)
+        Me.RedTrackBar.TabIndex = 38
+        Me.RedTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
+        '
         'HexDisplayLabel
         '
         Me.HexDisplayLabel.AutoSize = True
         Me.HexDisplayLabel.BackColor = System.Drawing.Color.White
-        Me.HexDisplayLabel.Location = New System.Drawing.Point(478, 328)
+        Me.HexDisplayLabel.Location = New System.Drawing.Point(473, 195)
         Me.HexDisplayLabel.Name = "HexDisplayLabel"
         Me.HexDisplayLabel.Size = New System.Drawing.Size(39, 20)
         Me.HexDisplayLabel.TabIndex = 37
         Me.HexDisplayLabel.Text = "------"
-        '
-        'HEXLabel
-        '
-        Me.HEXLabel.AutoSize = True
-        Me.HEXLabel.Location = New System.Drawing.Point(448, 251)
-        Me.HEXLabel.Name = "HEXLabel"
-        Me.HEXLabel.Size = New System.Drawing.Size(84, 20)
-        Me.HEXLabel.TabIndex = 35
-        Me.HEXLabel.Text = "HEX value"
-        '
-        'IndicatorTextBox
-        '
-        Me.IndicatorTextBox.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.IndicatorTextBox.Location = New System.Drawing.Point(452, 288)
-        Me.IndicatorTextBox.Name = "IndicatorTextBox"
-        Me.IndicatorTextBox.Size = New System.Drawing.Size(100, 26)
-        Me.IndicatorTextBox.TabIndex = 34
-        Me.IndicatorTextBox.TabStop = False
-        '
-        'LEDTextBox
-        '
-        Me.LEDTextBox.BackColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.LEDTextBox.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.LEDTextBox.Location = New System.Drawing.Point(452, 189)
-        Me.LEDTextBox.Name = "LEDTextBox"
-        Me.LEDTextBox.Size = New System.Drawing.Size(100, 26)
-        Me.LEDTextBox.TabIndex = 33
-        Me.LEDTextBox.TabStop = False
         '
         'ClearColorButton
         '
@@ -439,68 +472,38 @@ Partial Class PTZGUI
         Me.ExtiButton.Text = "Exit (&E)"
         Me.ExtiButton.UseVisualStyleBackColor = True
         '
-        'RedTrackBar
+        'Timer1
         '
-        Me.RedTrackBar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.RedTrackBar.Location = New System.Drawing.Point(189, 70)
-        Me.RedTrackBar.Maximum = 255
-        Me.RedTrackBar.Name = "RedTrackBar"
-        Me.RedTrackBar.Size = New System.Drawing.Size(195, 69)
-        Me.RedTrackBar.TabIndex = 38
-        Me.RedTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
+        Me.Timer1.Interval = 1000
         '
-        'GreenTrackBar
+        'PortComboBox
         '
-        Me.GreenTrackBar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.GreenTrackBar.Location = New System.Drawing.Point(189, 169)
-        Me.GreenTrackBar.Maximum = 255
-        Me.GreenTrackBar.Name = "GreenTrackBar"
-        Me.GreenTrackBar.Size = New System.Drawing.Size(195, 69)
-        Me.GreenTrackBar.TabIndex = 39
-        Me.GreenTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
+        Me.PortComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.PortComboBox.FormattingEnabled = True
+        Me.PortComboBox.Location = New System.Drawing.Point(1221, 605)
+        Me.PortComboBox.Name = "PortComboBox"
+        Me.PortComboBox.Size = New System.Drawing.Size(121, 28)
+        Me.PortComboBox.TabIndex = 38
         '
-        'BlueTrackBar
+        'SerialPortLabel
         '
-        Me.BlueTrackBar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BlueTrackBar.Location = New System.Drawing.Point(189, 266)
-        Me.BlueTrackBar.Maximum = 255
-        Me.BlueTrackBar.Name = "BlueTrackBar"
-        Me.BlueTrackBar.Size = New System.Drawing.Size(195, 69)
-        Me.BlueTrackBar.TabIndex = 40
-        Me.BlueTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
+        Me.SerialPortLabel.AutoSize = True
+        Me.SerialPortLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.SerialPortLabel.Location = New System.Drawing.Point(1217, 571)
+        Me.SerialPortLabel.Name = "SerialPortLabel"
+        Me.SerialPortLabel.Size = New System.Drawing.Size(86, 20)
+        Me.SerialPortLabel.TabIndex = 39
+        Me.SerialPortLabel.Text = "Serial Port "
         '
-        'RedDisplayLabel
+        'RefreshButton
         '
-        Me.RedDisplayLabel.AutoSize = True
-        Me.RedDisplayLabel.BackColor = System.Drawing.Color.Black
-        Me.RedDisplayLabel.ForeColor = System.Drawing.Color.White
-        Me.RedDisplayLabel.Location = New System.Drawing.Point(149, 90)
-        Me.RedDisplayLabel.Name = "RedDisplayLabel"
-        Me.RedDisplayLabel.Size = New System.Drawing.Size(21, 20)
-        Me.RedDisplayLabel.TabIndex = 41
-        Me.RedDisplayLabel.Text = "R"
-        '
-        'GreenDisplayLabel
-        '
-        Me.GreenDisplayLabel.AutoSize = True
-        Me.GreenDisplayLabel.BackColor = System.Drawing.Color.Black
-        Me.GreenDisplayLabel.ForeColor = System.Drawing.Color.White
-        Me.GreenDisplayLabel.Location = New System.Drawing.Point(148, 189)
-        Me.GreenDisplayLabel.Name = "GreenDisplayLabel"
-        Me.GreenDisplayLabel.Size = New System.Drawing.Size(22, 20)
-        Me.GreenDisplayLabel.TabIndex = 42
-        Me.GreenDisplayLabel.Text = "G"
-        '
-        'BlueDisplayLabel
-        '
-        Me.BlueDisplayLabel.AutoSize = True
-        Me.BlueDisplayLabel.BackColor = System.Drawing.Color.Black
-        Me.BlueDisplayLabel.ForeColor = System.Drawing.Color.White
-        Me.BlueDisplayLabel.Location = New System.Drawing.Point(150, 291)
-        Me.BlueDisplayLabel.Name = "BlueDisplayLabel"
-        Me.BlueDisplayLabel.Size = New System.Drawing.Size(20, 20)
-        Me.BlueDisplayLabel.TabIndex = 43
-        Me.BlueDisplayLabel.Text = "B"
+        Me.RefreshButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.RefreshButton.Location = New System.Drawing.Point(1348, 605)
+        Me.RefreshButton.Name = "RefreshButton"
+        Me.RefreshButton.Size = New System.Drawing.Size(84, 39)
+        Me.RefreshButton.TabIndex = 40
+        Me.RefreshButton.Text = "Refresh"
+        Me.RefreshButton.UseVisualStyleBackColor = True
         '
         'PTZGUI
         '
@@ -508,7 +511,10 @@ Partial Class PTZGUI
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.ClearColorButton
-        Me.ClientSize = New System.Drawing.Size(1433, 713)
+        Me.ClientSize = New System.Drawing.Size(1519, 710)
+        Me.Controls.Add(Me.RefreshButton)
+        Me.Controls.Add(Me.SerialPortLabel)
+        Me.Controls.Add(Me.PortComboBox)
         Me.Controls.Add(Me.ExtiButton)
         Me.Controls.Add(Me.LEDGroupBox)
         Me.Controls.Add(Me.CameraGroupBox)
@@ -520,11 +526,12 @@ Partial Class PTZGUI
         Me.CameraGroupBox.PerformLayout()
         Me.LEDGroupBox.ResumeLayout(False)
         Me.LEDGroupBox.PerformLayout()
-        CType(Me.LEDPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.RedTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.GreenTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BlueTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GreenTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.RedTrackBar, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.LEDPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -547,9 +554,6 @@ Partial Class PTZGUI
     Friend WithEvents RedTextBox As TextBox
     Friend WithEvents ClearColorButton As Button
     Friend WithEvents SetColorButton As Button
-    Friend WithEvents LEDTextBox As TextBox
-    Friend WithEvents IndicatorTextBox As TextBox
-    Friend WithEvents HEXLabel As Label
     Friend WithEvents XHScrollBar As HScrollBar
     Friend WithEvents CameraCenterButton As Button
     Friend WithEvents ZoomValueLabel As Label
@@ -568,4 +572,8 @@ Partial Class PTZGUI
     Friend WithEvents RedDisplayLabel As Label
     Friend WithEvents GreenDisplayLabel As Label
     Friend WithEvents BlueDisplayLabel As Label
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents PortComboBox As ComboBox
+    Friend WithEvents SerialPortLabel As Label
+    Friend WithEvents RefreshButton As Button
 End Class
