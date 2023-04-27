@@ -96,7 +96,7 @@ Partial Class PTZGUI
         Me.CameraGroupBox.Location = New System.Drawing.Point(12, 21)
         Me.CameraGroupBox.Name = "CameraGroupBox"
         Me.CameraGroupBox.Size = New System.Drawing.Size(801, 679)
-        Me.CameraGroupBox.TabIndex = 1
+        Me.CameraGroupBox.TabIndex = 4
         Me.CameraGroupBox.TabStop = False
         Me.CameraGroupBox.Text = "Camera Position "
         '
@@ -106,7 +106,7 @@ Partial Class PTZGUI
         Me.LensButton.Location = New System.Drawing.Point(314, 537)
         Me.LensButton.Name = "LensButton"
         Me.LensButton.Size = New System.Drawing.Size(97, 75)
-        Me.LensButton.TabIndex = 31
+        Me.LensButton.TabIndex = 19
         Me.LensButton.Text = "Clear Lens Settings (L)"
         Me.LensButton.UseVisualStyleBackColor = True
         '
@@ -123,12 +123,12 @@ Partial Class PTZGUI
         'FocusHScrollBar
         '
         Me.FocusHScrollBar.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.FocusHScrollBar.Location = New System.Drawing.Point(429, 467)
+        Me.FocusHScrollBar.Location = New System.Drawing.Point(437, 467)
         Me.FocusHScrollBar.Margin = New System.Windows.Forms.Padding(10)
         Me.FocusHScrollBar.Maximum = 255
         Me.FocusHScrollBar.Name = "FocusHScrollBar"
         Me.FocusHScrollBar.Size = New System.Drawing.Size(280, 39)
-        Me.FocusHScrollBar.TabIndex = 30
+        Me.FocusHScrollBar.TabIndex = 18
         Me.FocusHScrollBar.TabStop = True
         '
         'ZoomHScrollBar
@@ -139,7 +139,7 @@ Partial Class PTZGUI
         Me.ZoomHScrollBar.Maximum = 255
         Me.ZoomHScrollBar.Name = "ZoomHScrollBar"
         Me.ZoomHScrollBar.Size = New System.Drawing.Size(280, 39)
-        Me.ZoomHScrollBar.TabIndex = 29
+        Me.ZoomHScrollBar.TabIndex = 17
         Me.ZoomHScrollBar.TabStop = True
         '
         'ZHScrollBar
@@ -150,7 +150,7 @@ Partial Class PTZGUI
         Me.ZHScrollBar.Maximum = 255
         Me.ZHScrollBar.Name = "ZHScrollBar"
         Me.ZHScrollBar.Size = New System.Drawing.Size(280, 39)
-        Me.ZHScrollBar.TabIndex = 27
+        Me.ZHScrollBar.TabIndex = 15
         Me.ZHScrollBar.TabStop = True
         '
         'ZoomValueLabel
@@ -199,7 +199,7 @@ Partial Class PTZGUI
         Me.CameraCenterButton.Location = New System.Drawing.Point(314, 258)
         Me.CameraCenterButton.Name = "CameraCenterButton"
         Me.CameraCenterButton.Size = New System.Drawing.Size(97, 75)
-        Me.CameraCenterButton.TabIndex = 28
+        Me.CameraCenterButton.TabIndex = 16
         Me.CameraCenterButton.Text = "To Center (&R)"
         Me.CameraCenterButton.UseVisualStyleBackColor = True
         '
@@ -211,7 +211,7 @@ Partial Class PTZGUI
         Me.XHScrollBar.Maximum = 255
         Me.XHScrollBar.Name = "XHScrollBar"
         Me.XHScrollBar.Size = New System.Drawing.Size(280, 39)
-        Me.XHScrollBar.TabIndex = 25
+        Me.XHScrollBar.TabIndex = 13
         Me.XHScrollBar.TabStop = True
         '
         'FocusLabel
@@ -241,7 +241,7 @@ Partial Class PTZGUI
         Me.YVScrollBar.Maximum = 255
         Me.YVScrollBar.Name = "YVScrollBar"
         Me.YVScrollBar.Size = New System.Drawing.Size(40, 271)
-        Me.YVScrollBar.TabIndex = 26
+        Me.YVScrollBar.TabIndex = 14
         Me.YVScrollBar.TabStop = True
         '
         'ZLabel
@@ -297,7 +297,7 @@ Partial Class PTZGUI
         Me.LEDGroupBox.Location = New System.Drawing.Point(830, 55)
         Me.LEDGroupBox.Name = "LEDGroupBox"
         Me.LEDGroupBox.Size = New System.Drawing.Size(576, 496)
-        Me.LEDGroupBox.TabIndex = 2
+        Me.LEDGroupBox.TabIndex = 3
         Me.LEDGroupBox.TabStop = False
         Me.LEDGroupBox.Text = "LED Colour"
         '
@@ -341,7 +341,7 @@ Partial Class PTZGUI
         Me.BlueTrackBar.Maximum = 255
         Me.BlueTrackBar.Name = "BlueTrackBar"
         Me.BlueTrackBar.Size = New System.Drawing.Size(195, 69)
-        Me.BlueTrackBar.TabIndex = 40
+        Me.BlueTrackBar.TabIndex = 7
         Me.BlueTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
         '
         'GreenTrackBar
@@ -351,7 +351,7 @@ Partial Class PTZGUI
         Me.GreenTrackBar.Maximum = 255
         Me.GreenTrackBar.Name = "GreenTrackBar"
         Me.GreenTrackBar.Size = New System.Drawing.Size(195, 69)
-        Me.GreenTrackBar.TabIndex = 39
+        Me.GreenTrackBar.TabIndex = 6
         Me.GreenTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
         '
         'RedTrackBar
@@ -361,14 +361,14 @@ Partial Class PTZGUI
         Me.RedTrackBar.Maximum = 255
         Me.RedTrackBar.Name = "RedTrackBar"
         Me.RedTrackBar.Size = New System.Drawing.Size(195, 69)
-        Me.RedTrackBar.TabIndex = 38
+        Me.RedTrackBar.TabIndex = 5
         Me.RedTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both
         '
         'HexDisplayLabel
         '
         Me.HexDisplayLabel.AutoSize = True
         Me.HexDisplayLabel.BackColor = System.Drawing.Color.White
-        Me.HexDisplayLabel.Location = New System.Drawing.Point(473, 195)
+        Me.HexDisplayLabel.Location = New System.Drawing.Point(434, 189)
         Me.HexDisplayLabel.Name = "HexDisplayLabel"
         Me.HexDisplayLabel.Size = New System.Drawing.Size(39, 20)
         Me.HexDisplayLabel.TabIndex = 37
@@ -379,9 +379,9 @@ Partial Class PTZGUI
         Me.ClearColorButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ClearColorButton.Location = New System.Drawing.Point(270, 394)
         Me.ClearColorButton.Name = "ClearColorButton"
-        Me.ClearColorButton.Size = New System.Drawing.Size(114, 59)
-        Me.ClearColorButton.TabIndex = 36
-        Me.ClearColorButton.Text = "Clear Color Settings "
+        Me.ClearColorButton.Size = New System.Drawing.Size(114, 78)
+        Me.ClearColorButton.TabIndex = 12
+        Me.ClearColorButton.Text = "Clear Color Settings  (&B)"
         Me.ClearColorButton.UseVisualStyleBackColor = True
         '
         'SetColorButton
@@ -389,9 +389,9 @@ Partial Class PTZGUI
         Me.SetColorButton.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.SetColorButton.Location = New System.Drawing.Point(144, 394)
         Me.SetColorButton.Name = "SetColorButton"
-        Me.SetColorButton.Size = New System.Drawing.Size(90, 59)
-        Me.SetColorButton.TabIndex = 35
-        Me.SetColorButton.Text = "Set Colour "
+        Me.SetColorButton.Size = New System.Drawing.Size(110, 78)
+        Me.SetColorButton.TabIndex = 11
+        Me.SetColorButton.Text = "Set Colour  (&C)"
         Me.SetColorButton.UseVisualStyleBackColor = False
         '
         'BlueTextBox
@@ -400,7 +400,7 @@ Partial Class PTZGUI
         Me.BlueTextBox.Location = New System.Drawing.Point(22, 288)
         Me.BlueTextBox.Name = "BlueTextBox"
         Me.BlueTextBox.Size = New System.Drawing.Size(100, 26)
-        Me.BlueTextBox.TabIndex = 34
+        Me.BlueTextBox.TabIndex = 10
         '
         'GreenTextBox
         '
@@ -409,7 +409,7 @@ Partial Class PTZGUI
         Me.GreenTextBox.Location = New System.Drawing.Point(22, 189)
         Me.GreenTextBox.Name = "GreenTextBox"
         Me.GreenTextBox.Size = New System.Drawing.Size(100, 26)
-        Me.GreenTextBox.TabIndex = 33
+        Me.GreenTextBox.TabIndex = 9
         '
         'RedTextBox
         '
@@ -418,12 +418,12 @@ Partial Class PTZGUI
         Me.RedTextBox.Location = New System.Drawing.Point(22, 90)
         Me.RedTextBox.Name = "RedTextBox"
         Me.RedTextBox.Size = New System.Drawing.Size(100, 26)
-        Me.RedTextBox.TabIndex = 32
+        Me.RedTextBox.TabIndex = 8
         '
         'LEDPictureBox
         '
         Me.LEDPictureBox.BackColor = System.Drawing.SystemColors.Control
-        Me.LEDPictureBox.Location = New System.Drawing.Point(412, 53)
+        Me.LEDPictureBox.Location = New System.Drawing.Point(391, 55)
         Me.LEDPictureBox.Name = "LEDPictureBox"
         Me.LEDPictureBox.Size = New System.Drawing.Size(158, 111)
         Me.LEDPictureBox.TabIndex = 21
@@ -464,12 +464,13 @@ Partial Class PTZGUI
         '
         'ExtiButton
         '
+        Me.ExtiButton.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ExtiButton.ForeColor = System.Drawing.Color.Black
         Me.ExtiButton.Location = New System.Drawing.Point(859, 622)
         Me.ExtiButton.Name = "ExtiButton"
         Me.ExtiButton.Size = New System.Drawing.Size(93, 56)
-        Me.ExtiButton.TabIndex = 37
-        Me.ExtiButton.Text = "Exit (&E)"
+        Me.ExtiButton.TabIndex = 20
+        Me.ExtiButton.Text = "Exit "
         Me.ExtiButton.UseVisualStyleBackColor = True
         '
         'Timer1
@@ -483,7 +484,7 @@ Partial Class PTZGUI
         Me.PortComboBox.Location = New System.Drawing.Point(1221, 605)
         Me.PortComboBox.Name = "PortComboBox"
         Me.PortComboBox.Size = New System.Drawing.Size(121, 28)
-        Me.PortComboBox.TabIndex = 38
+        Me.PortComboBox.TabIndex = 1
         '
         'SerialPortLabel
         '
@@ -501,16 +502,17 @@ Partial Class PTZGUI
         Me.RefreshButton.Location = New System.Drawing.Point(1348, 605)
         Me.RefreshButton.Name = "RefreshButton"
         Me.RefreshButton.Size = New System.Drawing.Size(84, 39)
-        Me.RefreshButton.TabIndex = 40
+        Me.RefreshButton.TabIndex = 2
         Me.RefreshButton.Text = "Refresh"
         Me.RefreshButton.UseVisualStyleBackColor = True
         '
         'PTZGUI
         '
-        Me.AcceptButton = Me.SetColorButton
+        Me.AcceptButton = Me.RefreshButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.ClearColorButton
+        Me.BackColor = System.Drawing.SystemColors.Highlight
+        Me.CancelButton = Me.ExtiButton
         Me.ClientSize = New System.Drawing.Size(1519, 710)
         Me.Controls.Add(Me.RefreshButton)
         Me.Controls.Add(Me.SerialPortLabel)

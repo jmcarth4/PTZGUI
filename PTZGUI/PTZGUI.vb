@@ -4,7 +4,6 @@
 'Jessica McArthur
 
 
-'TODO not crash when take out COMM port
 'TODO delet controls decatiation from program
 
 
@@ -17,6 +16,7 @@ Option Explicit On
 Public Class PTZGUI
     Dim portA As String
     Dim selectionSave As String
+    Dim sendData As Boolean = False
     ' Dim controlsActive As Boolean = False
 
     Dim redVariable, greenVariable, blueVariable As Integer
@@ -26,11 +26,13 @@ Public Class PTZGUI
     'Clears combo box of of items and loads all ports with a serial port into the combobox.
     'LED is off and camera is connected to last positon (center position).
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-        PortComboBox.Items.Clear()
-        PortComboBox.Items.Add("")
-        For Each sp As String In My.Computer.Ports.SerialPortNames
-            PortComboBox.Items.Add(sp)
-        Next
+
+        LoadPorts()
+        'PortComboBox.Items.Clear()
+        'PortComboBox.Items.Add("")
+        'For Each sp As String In My.Computer.Ports.SerialPortNames
+        '    PortComboBox.Items.Add(sp)
+        'Next
         ResetColor()
         FormerCameraPosition()
 
@@ -59,28 +61,30 @@ Public Class PTZGUI
 
                     'Saves selected port name.
 
-
                     selectionSave = PortComboBox.Text
-
+                    sendData = True
                     'controlsActive = True
 
                 Catch ex As Exception
+
                     'Displays message box, if error occurs.
                     MessageBox.Show("Error- Select another port")
-                    'Loads the saved selected port back. 
-
-
+                    'htfj
+                    sendData = False
+                    'hhfgj
                     PortComboBox.Text = selectionSave
-                    'controlsActive = False
+
                 End Try
             End If
         End If
     End Sub
-    'hkjlklgjfjhf
+    'hkjlklgjfjhf------------------------------------------------------------------------------------
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim arrSendByte(9) As Byte
-
         Timer1.Enabled = False
+
+        sendData = True
+
 
         arrSendByte(0) = CByte(Hex(36))
         arrSendByte(1) = CByte(RedTrackBar.Value)
@@ -92,23 +96,36 @@ Public Class PTZGUI
         arrSendByte(7) = CByte(ZoomHScrollBar.Value)
         arrSendByte(8) = CByte(FocusHScrollBar.Value)
 
+
         Try
             SerialPort1.Write(arrSendByte, 0, 9)
             Timer1.Enabled = True
+            'sendData = False
         Catch ex As Exception
-            'PortComboBox.Text = " Error!!!"
-            MessageBox.Show("Error-Serial port is disconnected")
 
-            selectionSave = ""
-            PortComboBox.Text = selectionSave
-            ' PortComboBox.Items.Add("")
+            MessageBox.Show("Error-Serial port is disconnected")
+            'sendData = False
+            SerialPort1.Close()
+            PortComboBox.Text = ""
         End Try
 
 
+        sendData = False
     End Sub
     'Clears port combobox of past items and  loads all current ports with serial ports to combobox. 
     Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton.Click
+        LoadPorts()
+        'PortComboBox.Items.Clear()
+
+        'PortComboBox.Items.Add("")
+        'For Each sp As String In My.Computer.Ports.SerialPortNames
+        '    PortComboBox.Items.Add(sp)
+        'Next
+    End Sub
+
+    Sub LoadPorts()
         PortComboBox.Items.Clear()
+
         PortComboBox.Items.Add("")
         For Each sp As String In My.Computer.Ports.SerialPortNames
             PortComboBox.Items.Add(sp)
@@ -117,14 +134,8 @@ Public Class PTZGUI
 
 
 
-
     'Validates color number value inputs. Input for each color must be a integer between 0- 255
     Function ColorInputValid() As Boolean
-
-        '*uses in several different subs.....
-        'Dim isRedValid As Boolean
-        'Dim isGreenValid As Boolean
-        'Dim isBlueValid As Boolean
 
         'Validates Red input
         Try
@@ -177,7 +188,7 @@ Public Class PTZGUI
         Catch
             BlueTextBox.Focus()
             isBlueValid = False
-            ErrorMessage("Blue input is must be number")
+            ErrorMessage("Blue input is not valid")
             BlueTextBox.Clear()
         End Try
         'Sets up error message ?????????
@@ -239,7 +250,7 @@ Public Class PTZGUI
     End Sub
 
     'Sets color LED display by changing track bars values. 
-    'Changes red value of color with green track bar
+    'Changes red value of color with red track bar
     Private Sub RedTrackBar_Scroll(sender As Object, e As EventArgs) Handles RedTrackBar.Scroll
         LEDPictureBox.BackColor = Color.FromArgb(RedTrackBar.Value, GreenTrackBar.Value, BlueTrackBar.Value)
         RedDisplayLabel.Text = CStr(RedTrackBar.Value)
@@ -406,6 +417,8 @@ Public Class PTZGUI
     Private Sub FocusHScrollBar_Scroll(sender As Object, e As ScrollEventArgs) Handles FocusHScrollBar.Scroll
         FocusValueLabel.Text = CStr(FocusHScrollBar.Value)
     End Sub
+
+
 
 
     'Button- Returns camera to center of room. 
