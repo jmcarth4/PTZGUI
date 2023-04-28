@@ -3,7 +3,7 @@
 '3/27/2023 
 'Jessica McArthur
 
-
+'afasfasdfasdfasdfa
 'TODO delet controls decatiation from program
 
 
@@ -68,10 +68,16 @@ Public Class PTZGUI
                 Catch ex As Exception
 
                     'Displays message box, if error occurs.
-                    MessageBox.Show("Error- Select another port")
+                    ' MessageBox.Show("Error- Select another port")
+                    ErrorMessage("Error select an onther port")
+
                     'htfj
                     sendData = False
                     'hhfgj
+                    If ErrorMessage() <> "" Then
+                        MsgBox(ErrorMessage())
+                        ErrorMessage(, True)
+                    End If
                     PortComboBox.Text = selectionSave
 
                 End Try
@@ -87,13 +93,13 @@ Public Class PTZGUI
 
 
         arrSendByte(0) = CByte(Hex(36))
-            arrSendByte(1) = CByte(RedTrackBar.Value)
-            arrSendByte(2) = CByte(GreenTrackBar.Value)
-            arrSendByte(3) = CByte(BlueTrackBar.Value)
-            arrSendByte(4) = CByte(XHScrollBar.Value)
-            arrSendByte(5) = CByte(YVScrollBar.Value)
-            arrSendByte(6) = CByte(ZHScrollBar.Value)
-            arrSendByte(7) = CByte(ZoomHScrollBar.Value)
+        arrSendByte(1) = CByte(RedTrackBar.Value)
+        arrSendByte(2) = CByte(GreenTrackBar.Value)
+        arrSendByte(3) = CByte(BlueTrackBar.Value)
+        arrSendByte(4) = CByte(XHScrollBar.Value)
+        arrSendByte(5) = CByte(YVScrollBar.Value)
+        arrSendByte(6) = CByte(ZHScrollBar.Value)
+        arrSendByte(7) = CByte(ZoomHScrollBar.Value)
         arrSendByte(8) = CByte(FocusHScrollBar.Value)
 
 
@@ -102,13 +108,18 @@ Public Class PTZGUI
             Timer1.Enabled = True
             'sendData = False
         Catch ex As Exception
-
-            MessageBox.Show("Error-Serial port is disconnected")
+            ErrorMessage("Error port is disconnected")
+            'MessageBox.Show("Error-Serial port is disconnected")
             'sendData = False
             SerialPort1.Close()
-            PortComboBox.Text = ""
-        End Try
 
+            If ErrorMessage() <> "" Then
+                MsgBox(ErrorMessage())
+                ErrorMessage(, True)
+            End If
+            PortComboBox.Text = ""
+
+        End Try
 
         sendData = False
     End Sub
