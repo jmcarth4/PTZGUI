@@ -87,13 +87,13 @@ Public Class PTZGUI
 
 
         arrSendByte(0) = CByte(Hex(36))
-        arrSendByte(1) = CByte(RedTrackBar.Value)
-        arrSendByte(2) = CByte(GreenTrackBar.Value)
-        arrSendByte(3) = CByte(BlueTrackBar.Value)
-        arrSendByte(4) = CByte(XHScrollBar.Value)
-        arrSendByte(5) = CByte(YVScrollBar.Value)
-        arrSendByte(6) = CByte(ZHScrollBar.Value)
-        arrSendByte(7) = CByte(ZoomHScrollBar.Value)
+            arrSendByte(1) = CByte(RedTrackBar.Value)
+            arrSendByte(2) = CByte(GreenTrackBar.Value)
+            arrSendByte(3) = CByte(BlueTrackBar.Value)
+            arrSendByte(4) = CByte(XHScrollBar.Value)
+            arrSendByte(5) = CByte(YVScrollBar.Value)
+            arrSendByte(6) = CByte(ZHScrollBar.Value)
+            arrSendByte(7) = CByte(ZoomHScrollBar.Value)
         arrSendByte(8) = CByte(FocusHScrollBar.Value)
 
 
