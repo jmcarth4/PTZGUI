@@ -123,35 +123,44 @@ Partial Class PTZGUI
         'FocusHScrollBar
         '
         Me.FocusHScrollBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.FocusHScrollBar.LargeChange = 1
         Me.FocusHScrollBar.Location = New System.Drawing.Point(437, 467)
         Me.FocusHScrollBar.Margin = New System.Windows.Forms.Padding(10)
-        Me.FocusHScrollBar.Maximum = 255
+        Me.FocusHScrollBar.Maximum = 30
+        Me.FocusHScrollBar.Minimum = 8
         Me.FocusHScrollBar.Name = "FocusHScrollBar"
         Me.FocusHScrollBar.Size = New System.Drawing.Size(280, 39)
         Me.FocusHScrollBar.TabIndex = 18
         Me.FocusHScrollBar.TabStop = True
+        Me.FocusHScrollBar.Value = 8
         '
         'ZoomHScrollBar
         '
         Me.ZoomHScrollBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ZoomHScrollBar.LargeChange = 1
         Me.ZoomHScrollBar.Location = New System.Drawing.Point(13, 467)
         Me.ZoomHScrollBar.Margin = New System.Windows.Forms.Padding(10)
-        Me.ZoomHScrollBar.Maximum = 255
+        Me.ZoomHScrollBar.Maximum = 30
+        Me.ZoomHScrollBar.Minimum = 8
         Me.ZoomHScrollBar.Name = "ZoomHScrollBar"
         Me.ZoomHScrollBar.Size = New System.Drawing.Size(280, 39)
         Me.ZoomHScrollBar.TabIndex = 17
         Me.ZoomHScrollBar.TabStop = True
+        Me.ZoomHScrollBar.Value = 8
         '
         'ZHScrollBar
         '
         Me.ZHScrollBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ZHScrollBar.LargeChange = 1
         Me.ZHScrollBar.Location = New System.Drawing.Point(21, 191)
         Me.ZHScrollBar.Margin = New System.Windows.Forms.Padding(10)
-        Me.ZHScrollBar.Maximum = 255
+        Me.ZHScrollBar.Maximum = 30
+        Me.ZHScrollBar.Minimum = 8
         Me.ZHScrollBar.Name = "ZHScrollBar"
         Me.ZHScrollBar.Size = New System.Drawing.Size(280, 39)
         Me.ZHScrollBar.TabIndex = 15
         Me.ZHScrollBar.TabStop = True
+        Me.ZHScrollBar.Value = 8
         '
         'ZoomValueLabel
         '
@@ -206,13 +215,16 @@ Partial Class PTZGUI
         'XHScrollBar
         '
         Me.XHScrollBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.XHScrollBar.LargeChange = 1
         Me.XHScrollBar.Location = New System.Drawing.Point(21, 68)
         Me.XHScrollBar.Margin = New System.Windows.Forms.Padding(10)
-        Me.XHScrollBar.Maximum = 255
+        Me.XHScrollBar.Maximum = 30
+        Me.XHScrollBar.Minimum = 8
         Me.XHScrollBar.Name = "XHScrollBar"
         Me.XHScrollBar.Size = New System.Drawing.Size(280, 39)
         Me.XHScrollBar.TabIndex = 13
         Me.XHScrollBar.TabStop = True
+        Me.XHScrollBar.Value = 8
         '
         'FocusLabel
         '
@@ -237,12 +249,15 @@ Partial Class PTZGUI
         'YVScrollBar
         '
         Me.YVScrollBar.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.YVScrollBar.LargeChange = 1
         Me.YVScrollBar.Location = New System.Drawing.Point(496, 34)
-        Me.YVScrollBar.Maximum = 255
+        Me.YVScrollBar.Maximum = 30
+        Me.YVScrollBar.Minimum = 8
         Me.YVScrollBar.Name = "YVScrollBar"
         Me.YVScrollBar.Size = New System.Drawing.Size(40, 271)
         Me.YVScrollBar.TabIndex = 14
         Me.YVScrollBar.TabStop = True
+        Me.YVScrollBar.Value = 8
         '
         'ZLabel
         '

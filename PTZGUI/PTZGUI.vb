@@ -14,25 +14,25 @@ Public Class PTZGUI
     Dim portA As String
     Dim selectionSave As String
     Dim sendData As Boolean = False
-    ' Dim controlsActive As Boolean = False
     Dim redVariable, greenVariable, blueVariable As Integer
     Dim isRedValid, isGreenValid, isBlueValid As Boolean
 
     'Starts program to default setting.
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'Clears combo box of items and loads all ports with a serial connection
-        'into the combobox.
+        'Calls sub that clears combo box of items and loads all ports with a serial connection into the combobox.
         LoadPorts()
-        'LED indicator is off and all inputs at 0 or emptied. 
+        'Calls sub that sets LED indicator is off and all color inputs to 0 or emptied. 
         ResetColor()
-        'Camera scroll bars are set to center position.
+        'Calls sub that set camera position scrollbars to center position.
         FormerCameraPosition()
     End Sub
 
     'Clears port combobox of past items and loads all current ports with serial communication to port combobox. 
     Sub LoadPorts()
+        'Clears port combobox and add blank line. 
         PortComboBox.Items.Clear()
         PortComboBox.Items.Add("")
+        'Adds active serial ports to the port combo box. 
         For Each sp As String In My.Computer.Ports.SerialPortNames
             PortComboBox.Items.Add(sp)
         Next
@@ -40,10 +40,10 @@ Public Class PTZGUI
 
     'Code for selecting serial port adapted from Ryan Wildblood PTZ Camera Project (2019)
     Private Sub PortComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PortComboBox.SelectedIndexChanged
+
         If PortComboBox.Text = "" Then
             'Closes serial port from changing inputs.
             SerialPort1.Close()
-            'controlsActive = False
         Else
             If portA <> PortComboBox.Text Then
                 'Saves port that was selected if not equal to previously saved port.
@@ -63,11 +63,10 @@ Public Class PTZGUI
                     selectionSave = PortComboBox.Text
                     'Allows program to send data.
                     sendData = True
-                    'controlsActive = True
 
                 Catch ex As Exception
                     'Displays message box, if invalid port is selected.
-                    ErrorMessage("Error - Select anther port")
+                    ErrorMessage("Error - Select another port")
                     'Disables ability to send data. 
                     sendData = False
                     'Sends error message to message function.
@@ -85,10 +84,12 @@ Public Class PTZGUI
     'Populates byte array and writes serial data at set interval.
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim arrSendByte(9) As Byte
+
         'Timer disabled when trying to send data
         Timer1.Enabled = False
         'Enble program to send data.
         sendData = True
+
         'Converts and populates byte array with users inputs.
         arrSendByte(0) = CByte(Hex(36))
         arrSendByte(1) = CByte(RedTrackBar.Value)
@@ -99,6 +100,7 @@ Public Class PTZGUI
         arrSendByte(6) = CByte(ZHScrollBar.Value)
         arrSendByte(7) = CByte(ZoomHScrollBar.Value)
         arrSendByte(8) = CByte(FocusHScrollBar.Value)
+
         ' Verifies if port is available to send data.
         Try
             'Writes serial data to port.
@@ -107,7 +109,7 @@ Public Class PTZGUI
             Timer1.Enabled = True
         Catch ex As Exception
             'Displays error message of disconnected port
-            ErrorMessage("Error - port is disconnected")
+            ErrorMessage("Error - Port is disconnected")
             SerialPort1.Close()
             If ErrorMessage() <> "" Then
                 MsgBox(ErrorMessage())
@@ -116,12 +118,14 @@ Public Class PTZGUI
             'Deselects the disconnected port in the combobox.
             PortComboBox.Text = ""
         End Try
+
         'Disables programs ablity to send data. 
         sendData = False
     End Sub
 
     'Button - updates connected serial ports.
     Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton.Click
+        'Calls function that loads current ports to port combo box. 
         LoadPorts()
     End Sub
 
@@ -142,24 +146,33 @@ Public Class PTZGUI
         RedDisplayLabel.BackColor = Color.FromArgb(RedTrackBar.Value, 0, 0)
         'Updates user input textbox for red.
         RedTextBox.Text = CStr(RedTrackBar.Value)
+        'Calls function to display hex value of LED indicator picture box, when LED color is set by trackers.
         DisplayHexTracker()
     End Sub
 
     ' Changes green value of color with green track bar.
     Private Sub GreenTrackBar_Scroll(sender As Object, e As EventArgs) Handles GreenTrackBar.Scroll
+        'Sets the color of the LED indicator picture box.
         LEDPictureBox.BackColor = Color.FromArgb(RedTrackBar.Value, GreenTrackBar.Value, BlueTrackBar.Value)
+        'Displays slider color in label and as back color of the label.
         GreenDisplayLabel.Text = CStr(GreenTrackBar.Value)
         GreenDisplayLabel.BackColor = Color.FromArgb(0, GreenTrackBar.Value, 0)
+        'Updates user input textbox for green.
         GreenTextBox.Text = CStr(GreenTrackBar.Value)
+        'Calls function to display hex value of LED indicator picture box, when LED color is set by trackers.
         DisplayHexTracker()
     End Sub
 
     'Changes blue value of color with blue track bar.
     Private Sub BlueTrackBar_Scroll(sender As Object, e As EventArgs) Handles BlueTrackBar.Scroll
+        'Sets the color of the LED indicator picture box.
         LEDPictureBox.BackColor = Color.FromArgb(RedTrackBar.Value, GreenTrackBar.Value, BlueTrackBar.Value)
+        'Displays slider color in label and as back color of the label.
         BlueDisplayLabel.Text = CStr(BlueTrackBar.Value)
         BlueDisplayLabel.BackColor = Color.FromArgb(0, 0, BlueTrackBar.Value)
+        'Updates user input textbox for blue.
         BlueTextBox.Text = CStr(BlueTrackBar.Value)
+        'Calls function to display hex value of LED indicator picture box, when LED color is set by trackers.
         DisplayHexTracker()
     End Sub
 
@@ -175,7 +188,7 @@ Public Class PTZGUI
         greenHex = Hex(GreenTrackBar.Value)
         blueHex = Hex(BlueTrackBar.Value)
 
-        'Count the number of characters in string of each color's hex value.
+        'Counts the number of characters in string of each color's hex value.
         numberCharatersR = Len(redHEX)
         numberCharatersG = Len(greenHex)
         numberCharactersB = Len(blueHex)
@@ -210,13 +223,15 @@ Public Class PTZGUI
 
     'Sets color by user integer inputs for Red, Green and Blue. 
 
-
     'Validates color number value inputs.
     'Input for each color must be a integer between 0- 255
     Function ColorInputValid() As Boolean
+
         'Validates Red input
         Try
+            'Converts red textbox input to interger
             redVariable = CInt(RedTextBox.Text)
+            'Disables red textbox input.
             isRedValid = False
             ' Validates if input is a interger between 0 and 255
             If redVariable < 0 Or redVariable > 255 Then
@@ -235,47 +250,61 @@ Public Class PTZGUI
             ErrorMessage("Red input is not valid" & vbNewLine & " - Input must be a number")
             RedTextBox.Clear()
         End Try
+
         'Validates Green input
         Try
+            'Converts green textbox input to interger
             greenVariable = CInt(GreenTextBox.Text)
+            'Disables green textbox input.
             isGreenValid = False
+            ' Validates if input is a interger between 0 and 255
             If greenVariable < 0 Or greenVariable > 255 Then
                 isGreenValid = False
                 ErrorMessage("Green Input must be between 0-255")
                 GreenTextBox.Clear()
                 GreenTextBox.Focus()
             Else
+                'Enables green input to be used in further subs.
                 isGreenValid = True
             End If
         Catch
+            'Removes all non integer values and sends error message to user.
             GreenTextBox.Focus()
             isGreenValid = False
             ErrorMessage("Green input is not valid" & vbNewLine & " - Input must be a number")
             GreenTextBox.Clear()
         End Try
+
         'Validates Blue input
         Try
+            'Converts blue textbox input to interger
             blueVariable = CInt(BlueTextBox.Text)
+            'Disables blue textbox input.
             isBlueValid = False
+            ' Validates if input is a interger between 0 and 255
             If blueVariable < 0 Or blueVariable > 255 Then
                 isBlueValid = False
                 ErrorMessage("Blue Input must be between 0-255")
                 BlueTextBox.Clear()
                 BlueTextBox.Focus()
             Else
+                'Enables blue input to be used in further subs.
                 isBlueValid = True
             End If
         Catch
+            'Removes all non integer values and sends error message to user.
             BlueTextBox.Focus()
             isBlueValid = False
             ErrorMessage("Blue input is not valid" & vbNewLine & " - Input must be a number")
             BlueTextBox.Clear()
         End Try
+
         'Sends messages to error message function
         If ErrorMessage() <> "" Then
             MsgBox(ErrorMessage())
             ErrorMessage(, True)
         End If
+
         'Returns boolean values when color inputs are valid
         Return isRedValid
         Return isGreenValid
@@ -288,10 +317,12 @@ Public Class PTZGUI
         Static _message As String
         Select Case clear
             Case False
+                'Display error message if present
                 If newMessage <> "" Then
                     _message &= newMessage & vbCrLf
                 End If
             Case Else
+                'Clear message
                 _message = ""
         End Select
         Return _message
@@ -309,7 +340,7 @@ Public Class PTZGUI
             'Displays the set color of LED in picture box.
             LEDPictureBox.BackColor = Color.FromArgb(redVariable, greenVariable, blueVariable)
 
-            'Updates tracker bars for each color when valid input is put into color textbox. 
+            'Updates tracker bars and labels for each color when valid input is put into color textbox. 
             RedTrackBar.Value = CInt(RedTextBox.Text)
             RedDisplayLabel.Text = CStr(RedTrackBar.Value)
             RedDisplayLabel.BackColor = Color.FromArgb(RedTrackBar.Value, 0, 0)
@@ -322,7 +353,8 @@ Public Class PTZGUI
             BlueDisplayLabel.Text = CStr(BlueTrackBar.Value)
             BlueDisplayLabel.BackColor = Color.FromArgb(0, 0, BlueTrackBar.Value)
 
-            'Calls function to display integer color settings in Hex.            DisplayHex()
+            'Calls function to display integer color settings in hex, color LED color is set by trackers.
+            DisplayHex()
         End If
     End Sub
 
@@ -365,9 +397,25 @@ Public Class PTZGUI
             blueDisplay = blueHex
         End If
 
-        'Displays value of setcolor in hex as string.  Hex value displayed as  6 digit number 
+        'Displays value of setcolor in hex as string. 
+        'Hex value displayed as 6 digit number.
         HexDisplayLabel.Text = redDisplay & " - " & greenDisplay & " - " & blueDisplay
     End Sub
+
+    'Button - Sets selected color from user input
+    Private Sub SetColorButton_Click(sender As Object, e As EventArgs) Handles SetColorButton.Click
+        'Calls function that validates color input.
+        ColorInputValid()
+        'Calls sub that set LED indicator color. 
+        SetColor()
+    End Sub
+
+    'Button - Resets color section set to default setting (LED off) 
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearColorButton.Click
+        'Calls sub that resets all color settings.
+        ResetColor()
+    End Sub
+
 
     'Resets function to default (off/ black, text boxes clear and trackers at 0).
     Sub ResetColor()
@@ -389,55 +437,48 @@ Public Class PTZGUI
         HexDisplayLabel.Text = "LED OFF"
     End Sub
 
-    'Button - Sets selected color from user input
-    Private Sub SetColorButton_Click(sender As Object, e As EventArgs) Handles SetColorButton.Click
-        ColorInputValid()
-        SetColor()
-    End Sub
-
-    'Button - Resets color section set to default setting (LED off) 
-    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearColorButton.Click
-        ResetColor()
-    End Sub
-
 
 
 
     ' Buttons that control camera's position on X,Y,Z axis and lens settings of zoom and focus
 
-    'Scroll bar to adjust x position of camera (position of camera across room).
+    'Scrollbar to adjust x position of camera (position of camera across room).
     Private Sub XHScrollBar_Scroll(sender As Object, e As ScrollEventArgs) Handles XHScrollBar.Scroll
-        'Scrollbar value displayed in label.
+        'Displays value of scrollbar in label.
         XValueLabel.Text = CStr(XHScrollBar.Value)
     End Sub
 
-    'Scroll bar to adjust y position of camera (lens).
+    'Scrollbar to adjust Y position of camera (lens).
     Private Sub YVScrollBar_Scroll(sender As Object, e As ScrollEventArgs) Handles YVScrollBar.Scroll
+        'Displays value of scrollbar in label.
         YValueLabel.Text = CStr(YVScrollBar.Value)
     End Sub
 
-    'Scroll bar to adjust z positon of camera (lens).
+    'Scrollbar to adjust Z positon of camera (lens).
     Private Sub ZHScrollBar_Scroll(sender As Object, e As ScrollEventArgs) Handles ZHScrollBar.Scroll
+        'Displays value of scrollbar in label.
         ZValueLabel.Text = CStr(ZHScrollBar.Value)
     End Sub
 
-    'Scroll bar to adjust zoom of lens.
+    'Scrollbar to adjust zoom of lens.
     Private Sub ZoomHScrollBar_Scroll(sender As Object, e As ScrollEventArgs) Handles ZoomHScrollBar.Scroll
+        'Displays value of scrollbar in label.
         ZoomValueLabel.Text = CStr(ZoomHScrollBar.Value)
     End Sub
 
-    ' Scroll bar to adjust focus of lens. 
+    ' Scrollbar to adjust focus of lens. 
     Private Sub FocusHScrollBar_Scroll(sender As Object, e As ScrollEventArgs) Handles FocusHScrollBar.Scroll
+        'Displays value of scrollbar in label.
         FocusValueLabel.Text = CStr(FocusHScrollBar.Value)
     End Sub
 
     'Button- Returns camera to center of room. 
     Private Sub CameraHomeButton_Click(sender As Object, e As EventArgs) Handles CameraCenterButton.Click
         'Resets camera to center position
-        XHScrollBar.Value = 127
-        YVScrollBar.Value = 128
-        ZHScrollBar.Value = 127
-        'Sets labels to value of scroll bars.
+        XHScrollBar.Value = 19
+        YVScrollBar.Value = 19
+        ZHScrollBar.Value = 19
+        'Sets labels to value of scrollbars.
         XValueLabel.Text = CStr(XHScrollBar.Value)
         YValueLabel.Text = CStr(YVScrollBar.Value)
         ZValueLabel.Text = CStr(ZHScrollBar.Value)
@@ -447,26 +488,26 @@ Public Class PTZGUI
     'Button- Sets lens position to off or default.
     Private Sub LensButton_Click(sender As Object, e As EventArgs) Handles LensButton.Click
         'Lens position to default
-        ZoomHScrollBar.Value = 127
-        FocusHScrollBar.Value = 127
-        'Sets labels to value of scroll bars 
+        ZoomHScrollBar.Value = 19
+        FocusHScrollBar.Value = 19
+        'Sets labels to value of scrollbars 
         ZoomValueLabel.Text = CStr(ZoomHScrollBar.Value)
         FocusValueLabel.Text = CStr(FocusHScrollBar.Value)
     End Sub
 
     'Sets Camera control scroll bars to center of scroll bars.
     Sub FormerCameraPosition()
-        'Camera values set to center of scroll bar. 
-        XHScrollBar.Value = 127
-        YVScrollBar.Value = 128
-        ZHScrollBar.Value = 127
-        'Labels sets to value of scroll bars.
+        'Camera values set to center of scrollbar. 
+        XHScrollBar.Value = 19
+        YVScrollBar.Value = 19
+        ZHScrollBar.Value = 19
+        'Labels sets to value of scrollbars.
         XValueLabel.Text = CStr(XHScrollBar.Value)
         YValueLabel.Text = CStr(YVScrollBar.Value)
         ZValueLabel.Text = CStr(ZHScrollBar.Value)
         'Lens position to default
-        ZoomHScrollBar.Value = 127
-        FocusHScrollBar.Value = 127
+        ZoomHScrollBar.Value = 19
+        FocusHScrollBar.Value = 19
         ZoomValueLabel.Text = CStr(ZoomHScrollBar.Value)
         FocusValueLabel.Text = CStr(FocusHScrollBar.Value)
     End Sub
